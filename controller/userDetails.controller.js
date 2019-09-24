@@ -49,3 +49,16 @@ module.exports.authenticate = (req,res,next)=>{
         }
     }) (req,res);
 }
+
+
+module.exports.allGeet = (req,res,next)=>{
+    console.log('inside all geet');
+    return res.status(404).json(info);
+}
+
+module.exports.geet = (req,res,next)=>{
+    console.log('inside geet');
+    console.log(req.body.geetBox);
+    console.log(req);
+
+}

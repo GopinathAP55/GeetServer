@@ -11,8 +11,18 @@ router.post('/geet',userDetailscontroller.geet);
 //Login function 
 router.get('/login',jwtHelper.verifyJwtToken,userDetailscontroller.login);
 
-router.get('/allGeet',userDetailscontroller.allGeet);
+router.get('/allGeet',jwtHelper.verifyJwtToken,userDetailscontroller.allGeet);
 
 //Exporting the router details using module.exports. This can be used in app.js
 router.post('/authenticate',userDetailscontroller.authenticate);
+
+
+//Appiness project
+router.post('/insertProduct',userDetailscontroller.insertProduct);
+
+router.delete('/deleteProduct',userDetailscontroller.deleteProduct);
+
+
+
+
 module.exports = router;

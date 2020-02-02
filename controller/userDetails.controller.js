@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const UserDetails = mongoose.model('userDetails');
+const Product = mongoose.model('product');
+
 const _ = require('lodash');
 //Implemenation of the register funstion and exporting it.
 module.exports.register = (req,res,next)=>{
@@ -25,7 +27,6 @@ module.exports.register = (req,res,next)=>{
 //Implemenation of the login function and exporting it.
 
 module.exports.login = (req,res, next)=>{
-    console.log(req);
     console.log('inside login fn');
      UserDetails.findOne({_id:req._id}, function(err, UserDetails) {
         if (!UserDetails) {
@@ -53,12 +54,64 @@ module.exports.authenticate = (req,res,next)=>{
 
 module.exports.allGeet = (req,res,next)=>{
     console.log('inside all geet');
-    return res.status(404).json(info);
+    UserDetails.find({}).toArray(function(err, result){
+        if(err){
+            res.status(400).json(err);
+            console.log('err');
+        }else{
+            res.status(200).json({status:false,UserDetails : _.pick(UserDetails,['username','email'])});
+            console.log('success');
+        }
+    });
 }
 
 module.exports.geet = (req,res,next)=>{
-    console.log('inside geet');
-    console.log(req.body.geetBox);
-    console.log(req);
+    console.log(req.headers.authorization);
+    var token = req.headers.authorization
+    if(token){ 
+        var userPayLoad = (token.split('.')[1]);
+
+      
+        var decodedValue =   Buffer.from(userPayLoad, 'base64').toString() ; 
+        console.log(decodedValue);
+
+        
+
+        UserDetails.findByIdAndUpdate({_id:'5d899e097329fb4e8856a2f3'},{$set: {'geetValue':req.body.geetValue}},(err,user)=>{
+            if(err){
+                console.log(err)
+            }else{
+                console.log(user)
+            }
+        })
+       
+     }
+
+
+
+   //Appiness Project
+   
+   module.exports.insertProduct = (req,res,next)=>{
+    var newProduct = new Product();
+    newProduct.productName = req.body.productName;
+    newProduct.save((err , doc)=>{
+        if(!err){
+            return res.status(200).json({"message":'product created'})  ;     
+        }else{
+            console.log(err);
+            return res.status(400).json({"message":'product not created'});
+        }
+    }); 
+
+   }
+
+   module.exports.deleteProduct = (req,res,next)=>{
+    productName.deleteOne({"_id":objectId(req.body._id)}, function(err,result){
+        if(err){
+            return res.status(400).json({"message":'product not deleted'});
+        }
+    })
+
+   }
 
 }

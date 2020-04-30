@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const UserDetails = mongoose.model('userDetails');
-const Product = mongoose.model('product');
 
 const _ = require('lodash');
 //Implemenation of the register funstion and exporting it.
@@ -90,28 +89,5 @@ module.exports.geet = (req,res,next)=>{
 
 
    //Appiness Project
+    }
    
-   module.exports.insertProduct = (req,res,next)=>{
-    var newProduct = new Product();
-    newProduct.productName = req.body.productName;
-    newProduct.save((err , doc)=>{
-        if(!err){
-            return res.status(200).json({"message":'product created'})  ;     
-        }else{
-            console.log(err);
-            return res.status(400).json({"message":'product not created'});
-        }
-    }); 
-
-   }
-
-   module.exports.deleteProduct = (req,res,next)=>{
-    productName.deleteOne({"_id":objectId(req.body._id)}, function(err,result){
-        if(err){
-            return res.status(400).json({"message":'product not deleted'});
-        }
-    })
-
-   }
-
-}

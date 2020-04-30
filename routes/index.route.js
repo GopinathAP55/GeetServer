@@ -18,9 +18,7 @@ router.post('/authenticate',userDetailscontroller.authenticate);
 
 
 //Appiness project
-router.post('/insertProduct',userDetailscontroller.insertProduct);
 
-router.delete('/deleteProduct',userDetailscontroller.deleteProduct);
 
 
 

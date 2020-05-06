@@ -33,7 +33,7 @@ router.get('/speed',function(req,res){
 
     speedtest.getSpeed().then(s => {
         console.log(`Speed: ${s} Mbps`);
-        res.send(`Speed: ${s} Mbps`)
+        res.send(`| ${s.toFixed(0)} Mbps`)
         res.sendStatus(200)
     }).catch(e => {
         console.error(e.message);

@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "fast-speedtest-api": "^0.3.2",
     "js": "^0.1.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15",
     "mongoose": "^5.6.13",
     "oracledb": "^4.0.1",
